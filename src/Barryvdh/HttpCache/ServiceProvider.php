@@ -29,10 +29,10 @@ class ServiceProvider extends BaseServiceProvider {
             ), $app['config']->get('laravel-httpcache::config.options')
         );
 
-        $app['http_cache.store_path'] = $app['config']->get('laravel-httpcache::config.storage_path');
+        $app['http_cache.cache_dir'] = $app['config']->get('laravel-httpcache::config.cache_dir');
 
         $app['http_cache.store'] = $app->share(function ($app) {
-            return new Store($app['http_cache.store_path']);
+            return new Store($app['http_cache.cache_dir']);
         });
 
         $app['http_cache.esi'] = $app->share(function ($app) {
@@ -59,7 +59,7 @@ class ServiceProvider extends BaseServiceProvider {
 	 */
 	public function provides()
 	{
-		return array('http_cache.store', 'http_cache.esi', 'http_cache.store_path', 'http_cache.options');
+		return array('http_cache.store', 'http_cache.esi', 'http_cache.cache_dir', 'http_cache.options');
 	}
 
 }

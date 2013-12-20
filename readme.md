@@ -38,5 +38,12 @@ Enable ESI in your config file. You can now define ESI includes in your layouts.
 
 This will render partial/page, with it's own TTL. The rest of the page will remain cached (using it's own TTL)
 
+### Purging/flushing the cache
+
+You can purge a single url or just delete the entire cache directory:
+
+    App::make('http_cache.store')->purge($url);
+    \File::cleanDirectory(app('http_cache.cache_dir'));
+    
 ### More information
 For more information, read the [Docs on Symfony HttpCache](http://symfony.com/doc/current/book/http_cache.html#symfony2-reverse-proxy)
