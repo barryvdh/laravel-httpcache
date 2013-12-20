@@ -44,6 +44,10 @@ You can purge a single url or just delete the entire cache directory:
 
     App::make('http_cache.store')->purge($url);
     \File::cleanDirectory(app('http_cache.cache_dir'));
-    
+
+Or use the Artisan `httpcache:clear` command
+
+    $ php artisan httpcache:clear
+
 ### More information
 For more information, read the [Docs on Symfony HttpCache](http://symfony.com/doc/current/book/http_cache.html#symfony2-reverse-proxy)

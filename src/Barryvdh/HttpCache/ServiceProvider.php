@@ -50,6 +50,12 @@ class ServiceProvider extends BaseServiceProvider {
             }
         }
 
+        $this->app['command.httpcache.clear'] = $this->app->share(function($app)
+        {
+            return new Console\ClearCommand($app['files']);
+        });
+        $this->commands('command.httpcache.clear');
+
 	}
 
 	/**
@@ -59,7 +65,7 @@ class ServiceProvider extends BaseServiceProvider {
 	 */
 	public function provides()
 	{
-		return array('http_cache.store', 'http_cache.esi', 'http_cache.cache_dir', 'http_cache.options');
+		return array('http_cache.store', 'http_cache.esi', 'http_cache.cache_dir', 'http_cache.options', 'command.httpcache.clear');
 	}
 
 }
