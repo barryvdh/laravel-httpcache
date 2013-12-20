@@ -1,6 +1,6 @@
 ## HttpCache for Laravel 4.1
 
-Laravel 4.1 can easily use [url=http://stackphp.com/middlewares/]HttpKernelInterface Middlewares[/url], so also [url=http://symfony.com/doc/current/book/http_cache.html]HttpCache[/url].
+Laravel 4.1 can easily use [HttpKernelInterface Middlewares](http://stackphp.com/middlewares/), so also [HttpCache](url=http://symfony.com/doc/current/book/http_cache.html).
 This package provides a simple ServiceProvider to get you started with HttpCache.
 
 First, require this package in composer.json and run `composer update`
@@ -39,4 +39,4 @@ Enable ESI in your config file. You can now define ESI includes in your layouts.
 This will render partial/page, with it's own TTL. The rest of the page will remain cached (using it's own TTL)
 
 ### More information
-For more information, read the [url=http://symfony.com/doc/current/book/http_cache.html#symfony2-reverse-proxy]Docs on Symfony HttpCache[/url]
+For more information, read the [Docs on Symfony HttpCache](url=http://symfony.com/doc/current/book/http_cache.html#symfony2-reverse-proxy)
