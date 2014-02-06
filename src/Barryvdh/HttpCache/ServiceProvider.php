@@ -21,7 +21,7 @@ class ServiceProvider extends BaseServiceProvider {
 	public function register()
 	{
         $app = $this->app;
-        $this->package('barryvdh/laravel-httpcache');
+        $app['config']->package('barryvdh/laravel-httpcache', $this->guessPackagePath() . '/config');
 
         $app['http_cache.options'] = array_replace(
             array(
