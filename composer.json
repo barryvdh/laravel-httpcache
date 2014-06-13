@@ -1,6 +1,6 @@
 {
     "name": "barryvdh/laravel-httpcache",
-    "description": "HttpCache for Laravel 4.1",
+    "description": "HttpCache for Laravel 4",
     "license": "MIT",
     "keywords": ["laravel", "httpcache", "cache", "esi"],
     "authors": [
