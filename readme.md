@@ -1,11 +1,11 @@
-## HttpCache for Laravel 4.1
+## HttpCache for Laravel 4.1+
 
 Laravel 4.1 can easily use [HttpKernelInterface Middlewares](http://stackphp.com/middlewares/), so also [HttpCache](http://symfony.com/doc/current/book/http_cache.html).
 This package provides a simple ServiceProvider to get you started with HttpCache.
 
 First, require this package in composer.json and run `composer update`
 
-    "barryvdh/laravel-httpcache": "*"
+    "barryvdh/laravel-httpcache": "0.1.x"
 
 After updating, add the ServiceProvider to the array of providers in app/config/app.php
 
