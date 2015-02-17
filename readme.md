@@ -1,6 +1,6 @@
 ## HttpCache for Laravel 5
 
-### For Laravel 4.1+, require (v0.1.x)[https://github.com/barryvdh/laravel-httpcache/tree/v0.1.1]
+### For Laravel 4.1+, require [v0.1.x](https://github.com/barryvdh/laravel-httpcache/tree/v0.1.1)
 
 Laravel 5 can use [HttpKernelInterface Middlewares](http://stackphp.com/middlewares/), so also [HttpCache](http://symfony.com/doc/current/book/http_cache.html).
 This package provides a simple ServiceProvider to get you started with HttpCache.
