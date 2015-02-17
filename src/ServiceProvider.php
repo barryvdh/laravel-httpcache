@@ -21,31 +21,34 @@ class ServiceProvider extends BaseServiceProvider {
 	public function register()
 	{
         $app = $this->app;
-        $app['config']->package('barryvdh/laravel-httpcache', $this->guessPackagePath() . '/config');
+        
+        $configPath = __DIR__ . '/../config/httpcache.php';
+        $this->mergeConfigFrom($configPath, 'httpcache');
+        $this->publishes([$configPath => config_path('httpcache.php')], 'config');
 
         $app['http_cache.options'] = array_replace(
             array(
                 'debug' => $app['config']->get('app.debug'),
-            ), $app['config']->get('laravel-httpcache::config.options')
+            ), $app['config']->get('httpcache.options')
         );
 
-        $app['http_cache.cache_dir'] = $app['config']->get('laravel-httpcache::config.cache_dir');
+        $app['http_cache.cache_dir'] = $app['config']->get('httpcache.cache_dir');
 
         $app['http_cache.store'] = $app->share(function ($app) {
             return new Store($app['http_cache.cache_dir']);
         });
 
         $app['http_cache.esi'] = $app->share(function ($app) {
-            if( $app['config']->get('laravel-httpcache::config.esi') ){
+            if( $app['config']->get('httpcache.esi') ){
                 return new Esi();
             }
         });
 
-        if( $app['config']->get('laravel-httpcache::config.enabled') ){
+        if( $app['config']->get('httpcache.enabled') ){
 
             $app->middleware('Symfony\Component\HttpKernel\HttpCache\HttpCache', array($app['http_cache.store'], $app['http_cache.esi'], $app['http_cache.options']));
 
-            if( $app['config']->get('laravel-httpcache::config.esi') ){
+            if( $app['config']->get('httpcache.esi') ){
                 $app->middleware('Barryvdh\HttpCache\EsiMiddleware', array($app['http_cache.esi']));
             }
         }
