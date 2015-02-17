@@ -1,5 +1,6 @@
 <?php namespace Barryvdh\HttpCache;
 
+use Barryvdh\StackMiddleware\Wrapper;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use Symfony\Component\HttpKernel\HttpCache\Store;
 use Symfony\Component\HttpKernel\HttpCache\Esi;
@@ -44,14 +45,7 @@ class ServiceProvider extends BaseServiceProvider {
             }
         });
 
-        if( $app['config']->get('httpcache.enabled') ){
-
-            $app->middleware('Symfony\Component\HttpKernel\HttpCache\HttpCache', array($app['http_cache.store'], $app['http_cache.esi'], $app['http_cache.options']));
-
-            if( $app['config']->get('httpcache.esi') ){
-                $app->middleware('Barryvdh\HttpCache\EsiMiddleware', array($app['http_cache.esi']));
-            }
-        }
+        $app->alias('http_cache.esi', 'Symfony\Component\HttpKernel\HttpCache\Esi');
 
         $this->app['command.httpcache.clear'] = $this->app->share(function($app)
         {
@@ -60,6 +54,16 @@ class ServiceProvider extends BaseServiceProvider {
         $this->commands('command.httpcache.clear');
 
 	}
+
+    public function boot(Wrapper $stack)
+    {
+        $stack->bind('Barryvdh\HttpCache\Middleware\CacheRequests', function($kernel){
+            return $this->app->make(
+                'Symfony\Component\HttpKernel\HttpCache\HttpCache',
+                array($kernel, $this->app['http_cache.store'], $this->app['http_cache.esi'], $this->app['http_cache.options'])
+            );
+        });
+    }
 
 	/**
 	 * Get the services provided by the provider.

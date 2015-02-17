@@ -1,6 +1,6 @@
 ## HttpCache for Laravel 5
 
-### For Laravel 4.1+, check https://github.com/barryvdh/laravel-httpcache/tree/v0.1.1
+### For Laravel 4.1+, require (v0.1.x)[https://github.com/barryvdh/laravel-httpcache/tree/v0.1.1]
 
 Laravel 5 can use [HttpKernelInterface Middlewares](http://stackphp.com/middlewares/), so also [HttpCache](http://symfony.com/doc/current/book/http_cache.html).
 This package provides a simple ServiceProvider to get you started with HttpCache.
@@ -12,6 +12,10 @@ First, require this package in composer.json and run `composer update`
 After updating, add the ServiceProvider to the array of providers in app/config/app.php
 
     'Barryvdh\HttpCache\ServiceProvider',
+    
+You can now add the Middleware to your Kernel:
+
+    'Barryvdh\HttpCache\Middleware\CacheRequests',
 
 Caching is now enabled, for public responses. Just set the Ttl or MaxSharedAge
 
@@ -34,7 +38,11 @@ Publish the config to change some options (cache dir, default ttl, etc) or enabl
 
 ### ESI
 
-Enable ESI in your config file. You can now define ESI includes in your layouts.
+Enable ESI in your config file and add the Esi Middleware to your Kernel:
+
+    'Barryvdh\HttpCache\Middleware\ParseEsi',
+    
+You can now define ESI includes in your layouts.
 
     <esi:include src="<?= url('partial/page') ?>"/>
 

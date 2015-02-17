@@ -13,7 +13,8 @@
         "php": ">=5.4.0",
         "illuminate/support": "5.0.x",
         "symfony/console": "~2.6",
-        "symfony/http-kernel": "~2.6"
+        "symfony/http-kernel": "~2.6",
+        "barryvdh/laravel-stack-middleware": "0.1.*"
     },
     "autoload": {
         "psr-4": {
