@@ -14,7 +14,7 @@ return array(
     */
     'enabled' => true,
     'esi' => false,
-    'cache_dir' => storage_path().'/cache/httpcache',
+    'cache_dir' => storage_path('httpcache'),
 
     /*
      |--------------------------------------------------------------------------
