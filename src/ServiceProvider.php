@@ -5,8 +5,8 @@ use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use Symfony\Component\HttpKernel\HttpCache\Store;
 use Symfony\Component\HttpKernel\HttpCache\Esi;
 
-class ServiceProvider extends BaseServiceProvider {
-
+class ServiceProvider extends BaseServiceProvider
+{
 	/**
 	 * Indicates if loading of the provider is deferred.
 	 *
@@ -52,17 +52,19 @@ class ServiceProvider extends BaseServiceProvider {
             return new Console\ClearCommand($app['files']);
         });
         $this->commands('command.httpcache.clear');
-
 	}
 
     public function boot(StackMiddleware $stack)
     {
-        $stack->bind('Barryvdh\HttpCache\Middleware\CacheRequests', function($kernel){
-            return $this->app->make(
-                'Symfony\Component\HttpKernel\HttpCache\HttpCache',
-                array($kernel, $this->app['http_cache.store'], $this->app['http_cache.esi'], $this->app['http_cache.options'])
-            );
-        });
+        $stack->bind(
+          'Barryvdh\HttpCache\Middleware\CacheRequests',
+          'Symfony\Component\HttpKernel\HttpCache\HttpCache',
+          [
+            $this->app['http_cache.store'],
+            $this->app['http_cache.esi'],
+            $this->app['http_cache.options']
+          ]
+        );
     }
 
 	/**
@@ -74,5 +76,4 @@ class ServiceProvider extends BaseServiceProvider {
 	{
 		return array('http_cache.store', 'http_cache.esi', 'http_cache.cache_dir', 'http_cache.options', 'command.httpcache.clear');
 	}
-
 }
