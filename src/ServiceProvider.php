@@ -1,6 +1,6 @@
 <?php namespace Barryvdh\HttpCache;
 
-use Barryvdh\StackMiddleware\Wrapper;
+use Barryvdh\StackMiddleware\StackMiddleware;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use Symfony\Component\HttpKernel\HttpCache\Store;
 use Symfony\Component\HttpKernel\HttpCache\Esi;
@@ -55,7 +55,7 @@ class ServiceProvider extends BaseServiceProvider {
 
 	}
 
-    public function boot(Wrapper $stack)
+    public function boot(StackMiddleware $stack)
     {
         $stack->bind('Barryvdh\HttpCache\Middleware\CacheRequests', function($kernel){
             return $this->app->make(

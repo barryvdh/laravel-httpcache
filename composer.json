@@ -14,7 +14,7 @@
         "illuminate/support": "5.0.x",
         "symfony/console": "~2.6",
         "symfony/http-kernel": "~2.6",
-        "barryvdh/laravel-stack-middleware": "0.1.*"
+        "barryvdh/laravel-stack-middleware": "0.2.*"
     },
     "autoload": {
         "psr-4": {
