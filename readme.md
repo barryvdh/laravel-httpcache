@@ -38,7 +38,7 @@ Route::get('cached', array('after' => 'cache:30', function(){
 
 Publish the config to change some options (cache dir, default ttl, etc) or enable ESI.
 
-    $ php artisan config:publish barryvdh/laravel-httpcache
+    $ php artisan vendor:publish --provider="Barryvdh\HttpCache\ServiceProvider"
 
 ### ESI
 
