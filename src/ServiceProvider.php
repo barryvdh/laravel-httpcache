@@ -1,6 +1,5 @@
 <?php namespace Barryvdh\HttpCache;
 
-use Barryvdh\StackMiddleware\StackMiddleware;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use Symfony\Component\HttpKernel\HttpCache\Store;
 use Symfony\Component\HttpKernel\HttpCache\Esi;
@@ -25,7 +24,10 @@ class ServiceProvider extends BaseServiceProvider
         
         $configPath = __DIR__ . '/../config/httpcache.php';
         $this->mergeConfigFrom($configPath, 'httpcache');
-        $this->publishes([$configPath => config_path('httpcache.php')], 'config');
+        
+        if (function_exists('config_path')) {
+            $this->publishes([$configPath => config_path('httpcache.php')], 'config');
+        }
 
         $app['http_cache.options'] = array_replace(
             array(
@@ -54,8 +56,11 @@ class ServiceProvider extends BaseServiceProvider
         $this->commands('command.httpcache.clear');
 	}
 
-    public function boot(StackMiddleware $stack)
+    public function boot()
     {
+    	/** @var \Barryvdh\StackMiddleware\StackMiddleware $stack */
+        $stack = app('Barryvdh\StackMiddleware\StackMiddleware');
+        
         $stack->bind(
           'Barryvdh\HttpCache\Middleware\CacheRequests',
           'Symfony\Component\HttpKernel\HttpCache\HttpCache',
