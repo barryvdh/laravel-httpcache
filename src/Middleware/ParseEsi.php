@@ -1,10 +1,10 @@
 <?php namespace Barryvdh\HttpCache\Middleware;
 
 use Closure;
+use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\HttpCache\Esi;
-use Illuminate\Contracts\Routing\Middleware as MiddlewareInterface;
 
-class ParseEsi implements MiddlewareInterface
+class ParseEsi
 {
     /**
      * Esi Middleware adds a Surrogate-Control HTTP header when the Response needs to be parsed for ESI.
@@ -24,6 +24,10 @@ class ParseEsi implements MiddlewareInterface
      */
     public function handle($request, Closure $next)
     {
+        if ( ! $request instanceof Request) {
+            $request = Request::createFromBase($request);
+        }
+
         $response = $next($request);
 
         if (!is_null($this->esi)) {
