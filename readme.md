@@ -25,17 +25,6 @@ Route::get('my-page', function(){
 });
 ```
 
-You can also define a filter.
-
-```php
-Route::filter('cache', function($route, $request, $response, $age=60){
-    $response->setTtl($age);
-});
-Route::get('cached', array('after' => 'cache:30', function(){
-    return 'I am cached 30 seconds!';
-}));
-```
-
 Publish the config to change some options (cache dir, default ttl, etc) or enable ESI.
 
     $ php artisan vendor:publish --provider="Barryvdh\HttpCache\ServiceProvider"
