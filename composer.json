@@ -11,7 +11,7 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "illuminate/support": "5.0.x|5.1.x",
+        "illuminate/support": "5.0.x|5.1.x|5.2.x",
         "symfony/console": "~2.6",
         "symfony/http-kernel": "~2.6",
         "barryvdh/laravel-stack-middleware": "0.2.*"
