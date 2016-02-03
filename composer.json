@@ -12,8 +12,8 @@
     "require": {
         "php": ">=5.4.0",
         "illuminate/support": "5.0.x|5.1.x|5.2.x",
-        "symfony/console": "~2.6",
-        "symfony/http-kernel": "~2.6",
+        "symfony/console": "~2.6|~3.0",
+        "symfony/http-kernel": "~2.6|~3.0",
         "barryvdh/laravel-stack-middleware": "0.2.*"
     },
     "autoload": {
