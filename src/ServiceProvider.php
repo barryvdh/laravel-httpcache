@@ -1,8 +1,13 @@
 <?php namespace Barryvdh\HttpCache;
 
+use Barryvdh\HttpCache\Middleware\CacheRequests;
+use Barryvdh\StackMiddleware\StackMiddleware;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
+use Symfony\Component\HttpKernel\HttpCache\HttpCache;
 use Symfony\Component\HttpKernel\HttpCache\Store;
 use Symfony\Component\HttpKernel\HttpCache\Esi;
+use Symfony\Component\HttpKernel\HttpCache\StoreInterface;
+use Symfony\Component\HttpKernel\HttpCache\SurrogateInterface;
 
 class ServiceProvider extends BaseServiceProvider
 {
@@ -37,38 +42,36 @@ class ServiceProvider extends BaseServiceProvider
 
         $app['http_cache.cache_dir'] = $app['config']->get('httpcache.cache_dir');
 
-        $app['http_cache.store'] = $app->share(function ($app) {
+        $app->singleton(Store::class, function ($app) {
             return new Store($app['http_cache.cache_dir']);
         });
+        $app->alias(Store::class, StoreInterface::class);
 
-        $app['http_cache.esi'] = $app->share(function ($app) {
+        $app->singleton( Esi::class, function ($app) {
             if( $app['config']->get('httpcache.esi') ){
                 return new Esi();
             }
         });
+        $app->alias(Esi::class, SurrogateInterface::class);
 
-        $app->alias('http_cache.esi', 'Symfony\Component\HttpKernel\HttpCache\Esi');
-
-        $this->app['command.httpcache.clear'] = $this->app->share(function($app)
+        $this->app->bind('command.httpcache.clear', function($app)
         {
             return new Console\ClearCommand($app['files']);
         });
         $this->commands('command.httpcache.clear');
 	}
 
-    public function boot()
+    public function boot(StackMiddleware $stack)
     {
-    	/** @var \Barryvdh\StackMiddleware\StackMiddleware $stack */
-        $stack = app('Barryvdh\StackMiddleware\StackMiddleware');
-        
-        $stack->bind(
-          'Barryvdh\HttpCache\Middleware\CacheRequests',
-          'Symfony\Component\HttpKernel\HttpCache\HttpCache',
-          [
-            $this->app['http_cache.store'],
-            $this->app['http_cache.esi'],
-            $this->app['http_cache.options']
-          ]
+        $stack->bind(CacheRequests::class,
+            function($app) {
+              return new HttpCache(
+                  $app,
+                  $this->app->make(StoreInterface::class),
+                  $this->app->make(Esi::class),
+                  $this->app['http_cache.options']
+              );
+            }
         );
     }
 
@@ -79,6 +82,6 @@ class ServiceProvider extends BaseServiceProvider
 	 */
 	public function provides()
 	{
-		return array('http_cache.store', 'http_cache.esi', 'http_cache.cache_dir', 'http_cache.options', 'command.httpcache.clear');
+		return array(Esi::class, Store::class, StoreInterface::class, 'http_cache.cache_dir', 'http_cache.options', 'command.httpcache.clear');
 	}
 }
