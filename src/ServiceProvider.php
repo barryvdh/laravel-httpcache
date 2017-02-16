@@ -61,9 +61,9 @@ class ServiceProvider extends BaseServiceProvider
         $this->commands('command.httpcache.clear');
 	}
 
-    public function boot(StackMiddleware $stack)
+    public function boot()
     {
-        $stack->bind(CacheRequests::class,
+        $this->app->make(StackMiddleware::class)->bind(CacheRequests::class,
             function($app) {
               return new HttpCache(
                   $app,
