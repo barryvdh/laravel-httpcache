@@ -12,7 +12,7 @@ class CacheKernel implements HttpKernelInterface
     /** @var  Kernel */
     protected $kernel;
 
-    public function __construct(Kernel $kernel)
+    protected function __construct(Kernel $kernel)
     {
         $this->kernel = $kernel;
     }
@@ -36,9 +36,11 @@ class CacheKernel implements HttpKernelInterface
      */
     public static function wrap(Kernel $kernel, $storagePath = null, SurrogateInterface $surrogate = null, $options = [] )
     {
-        $cache = new static($kernel);
-        $store = new Store(storage_path($storagePath ?: storage_path('httpcache')));
-        $kernel = new HttpCache($cache, $store, $surrogate, $options);
+        $storagePath = $storagePath ?: storage_path('httpcache');
+        $store = new Store($storagePath);
+
+        $wrapper = new static($kernel);
+        $kernel = new HttpCache($wrapper, $store, $surrogate, $options);
 
         return $kernel;
     }
