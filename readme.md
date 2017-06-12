@@ -25,6 +25,19 @@ Route::get('my-page', function(){
 });
 ```
 
+You can use the provided `SetTtl` middleware in your Kernel to simplify this:
+
+```php
+protected $routeMiddleware = [
+    // ...
+    'ttl' => \Barryvdh\HttpCache\Middleware\SetTtl::class,
+];
+
+Route::get('my-page', function(){
+   return 'Hello' 
+})->middleware('ttl:60'); // Cache 1 minute
+```
+
 Publish the config to change some options (cache dir, default ttl, etc) or enable ESI.
 
     $ php artisan vendor:publish --provider="Barryvdh\HttpCache\ServiceProvider"
