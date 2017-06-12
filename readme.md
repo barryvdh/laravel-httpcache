@@ -42,6 +42,25 @@ Publish the config to change some options (cache dir, default ttl, etc) or enabl
 
     $ php artisan vendor:publish --provider="Barryvdh\HttpCache\ServiceProvider"
 
+### Direct approach, withou ServiceProvider
+> Note: This is still in beta, test with caution. It should be faster, but less flexibel because it starts earlier.
+
+You can also wrap the Kernel in the HttpCache, in your public/index.php. Replace the 'Run The Application' part like this:
+
+```
+$kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
+
+$kernel = \Barryvdh\HttpCache\CacheKernel::wrap($kernel);
+
+$response = $kernel->handle(
+    $request = Illuminate\Http\Request::capture()
+);
+
+$response->send();
+
+$kernel->terminate($request, $response);
+```
+
 ### ESI
 
 Enable ESI in your config file and add the Esi Middleware to your Kernel:
