@@ -24,6 +24,11 @@
     "extra": {
         "branch-alias": {
             "dev-master": "0.3-dev"
+        },
+        "laravel": {
+            "providers": [
+                "Barryvdh\\HttpCache\\ServiceProvider"
+            ]
         }
     }
 }
