@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 class SetTtl
 {
     /**
-     * Set the Time-To-Live in seconds om the incoming request
+     * Set the Time-To-Live in seconds on the incoming request
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
@@ -18,7 +18,7 @@ class SetTtl
     {
         $response = $next($request);
 
-        if ($response instanceof Response && $request instanceof  Request && $request->isMethodSafe()) {
+        if ($response instanceof Response && $request instanceof Request && $request->isMethodSafe()) {
             $response->setTtl($seconds);
         }
 
