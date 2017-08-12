@@ -42,8 +42,8 @@ Publish the config to change some options (cache dir, default ttl, etc) or enabl
 
     $ php artisan vendor:publish --provider="Barryvdh\HttpCache\ServiceProvider"
 
-### Direct approach, withou ServiceProvider
-> Note: This is still in beta, test with caution. It should be faster, but less flexibel because it starts earlier.
+### Direct approach, without ServiceProvider
+> Note: This is still in beta, test with caution. It should be faster, but less flexible because it starts earlier.
 
 You can also wrap the Kernel in the HttpCache, in your public/index.php. Replace the 'Run The Application' part like this:
 
