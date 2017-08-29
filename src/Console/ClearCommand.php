@@ -44,7 +44,7 @@ class ClearCommand extends Command
      *
      * @return void
      */
-    public function fire()
+    public function handle()
     {
 
         $cacheDir = $this->laravel['http_cache.cache_dir'];
