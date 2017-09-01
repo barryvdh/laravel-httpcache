@@ -46,15 +46,19 @@ class ClearCommand extends Command
      */
     public function handle()
     {
-
         $cacheDir = $this->laravel['http_cache.cache_dir'];
 
-        if($this->files->cleanDirectory($cacheDir)){
-            $this->info('HttpCache cleared!');
-        }else{
-            $this->error('Could not clear HttpCache');
+        foreach ($this->files->glob("{$cacheDir}/*") as $directory) {
+            if (!$this->files->deleteDirectory($directory)) {
+                $errors = true;
+            }
         }
 
+        if (isset($errors)) {
+            $this->error('Could not clear HttpCache');
+        } else {
+            $this->info('HttpCache cleared!');
+        }
     }
 
 
