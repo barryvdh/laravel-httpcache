@@ -1,4 +1,6 @@
-<?php namespace Barryvdh\HttpCache;
+<?php 
+
+namespace Barryvdh\HttpCache;
 
 use Barryvdh\HttpCache\Middleware\CacheRequests;
 use Barryvdh\StackMiddleware\StackMiddleware;
