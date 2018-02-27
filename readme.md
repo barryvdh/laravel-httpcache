@@ -5,9 +5,9 @@
 Laravel 5 can use [HttpKernelInterface Middlewares](http://stackphp.com/middlewares/), so also [HttpCache](http://symfony.com/doc/current/book/http_cache.html).
 This package provides a simple ServiceProvider to get you started with HttpCache.
 
-First, require this package in composer.json and run `composer update`
+First, require this package with composer
 
-    "barryvdh/laravel-httpcache": "0.2.x@dev"
+    composer require barryvdh/laravel-httpcache
 
 After updating, add the ServiceProvider to the array of providers in app/config/app.php
 
