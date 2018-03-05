@@ -18,7 +18,12 @@ class SetTtl
     {
         $response = $next($request);
 
-        if ($response instanceof Response && $request instanceof Request && $request->isMethodSafe()) {
+        if ($response instanceof Response && $request instanceof Request &&
+            (
+                (method_exists($request, 'isMethodCacheable') && $request->isMethodCacheable()) ||
+                (method_exists($request, 'isMethodSafe') && $request->isMethodSafe())
+            )
+        ) {
             $response->setTtl($seconds);
         }
 
