@@ -1,4 +1,6 @@
-<?php namespace Barryvdh\HttpCache;
+<?php 
+
+namespace Barryvdh\HttpCache;
 
 use Illuminate\Contracts\Http\Kernel;
 use Symfony\Component\HttpFoundation\Request;

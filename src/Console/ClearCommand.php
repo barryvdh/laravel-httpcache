@@ -1,4 +1,6 @@
-<?php namespace Barryvdh\HttpCache\Console;
+<?php 
+
+namespace Barryvdh\HttpCache\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;

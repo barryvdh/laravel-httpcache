@@ -1,4 +1,6 @@
-<?php namespace Barryvdh\HttpCache\Middleware;
+<?php 
+
+namespace Barryvdh\HttpCache\Middleware;
 
 use Closure;
 use Symfony\Component\HttpFoundation\Request;
