@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Barryvdh\HttpCache;
 
@@ -28,10 +28,10 @@ class ServiceProvider extends BaseServiceProvider
 	public function register()
 	{
         $app = $this->app;
-        
+
         $configPath = __DIR__ . '/../config/httpcache.php';
         $this->mergeConfigFrom($configPath, 'httpcache');
-        
+
         if (function_exists('config_path')) {
             $this->publishes([$configPath => config_path('httpcache.php')], 'config');
         }
@@ -67,6 +67,10 @@ class ServiceProvider extends BaseServiceProvider
     {
         $this->app->make(StackMiddleware::class)->bind(CacheRequests::class,
             function($app) {
+              if(! $this->app['config']->get('httpcache.enabled')) {
+                return $app;
+              }
+
               return new HttpCache(
                   $app,
                   $this->app->make(StoreInterface::class),
