@@ -1,4 +1,4 @@
-## HttpCache for Laravel 5
+## HttpCache for Laravel
 
 ### For Laravel 4.1+, require [v0.1.x](https://github.com/barryvdh/laravel-httpcache/tree/v0.1.1)
 
