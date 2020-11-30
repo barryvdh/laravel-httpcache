@@ -16,12 +16,12 @@ class SetTtl
      * @param  int $seconds
      * @return mixed
      */
-    public function handle($request, Closure $next, $seconds = 60)
+    public function handle($request, Closure $next, $seconds = null)
     {
         $response = $next($request);
 
         if ($response instanceof Response && $request instanceof Request && $request->isMethodCacheable()) {
-            $response->setTtl($seconds);
+            $response->setTtl($seconds ?? app()['http_cache.options.default_ttl'] ?? 60);
         }
 
         return $response;
