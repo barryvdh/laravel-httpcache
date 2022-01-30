@@ -1,6 +1,6 @@
 {
     "name": "barryvdh/laravel-httpcache",
-    "description": "HttpCache for Laravel 5",
+    "description": "HttpCache for Laravel",
     "license": "MIT",
     "keywords": ["laravel", "httpcache", "cache", "esi"],
     "authors": [
@@ -10,15 +10,23 @@
         }
     ],
     "require": {
-        "php": ">=5.5",
-        "illuminate/support": "^5.5|^6|^7|^8",
-        "symfony/console": "^3.2|^4|^5|^8",
-        "symfony/http-kernel": "^3.2|^4|^5|^8",
+        "php": ">=7.2",
+        "illuminate/support": "^6|^7|^8|^9",
+        "symfony/console": "^4|^5|^8|^9",
+        "symfony/http-kernel": "^4|^5|^6",
         "barryvdh/laravel-stack-middleware": "^1.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^4|^5|^6|^7"
     },
     "autoload": {
         "psr-4": {
             "Barryvdh\\HttpCache\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Barryvdh\\HttpCache\\Tests\\": "tests/"
         }
     },
     "extra": {
@@ -30,5 +38,10 @@
                 "Barryvdh\\HttpCache\\ServiceProvider"
             ]
         }
-    }
+    },
+    "scripts": {
+        "test": "phpunit"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
