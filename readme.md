@@ -1,21 +1,30 @@
 ## HttpCache for Laravel
+[![Tests](https://github.com/barryvdh/laravel-httpcache/workflows/Tests/badge.svg)](https://github.com/barryvdh/laravel-httpcache/actions)
+[![Packagist License](https://poser.pugx.org/barryvdh/laravel-httpcache/license.png)](http://choosealicense.com/licenses/mit/)
+[![Latest Stable Version](https://poser.pugx.org/barryvdh/laravel-httpcache/version.png)](https://packagist.org/packages/barryvdh/laravel-httpcache)
+[![Total Downloads](https://poser.pugx.org/barryvdh/laravel-httpcache/d/total.png)](https://packagist.org/packages/barryvdh/laravel-httpcache)
+[![Fruitcake](https://img.shields.io/badge/Powered%20By-Fruitcake-b2bc35.svg)](https://fruitcake.nl/)
 
-### For Laravel 4.1+, require [v0.1.x](https://github.com/barryvdh/laravel-httpcache/tree/v0.1.1)
-
-Laravel 5 can use [HttpKernelInterface Middlewares](http://stackphp.com/middlewares/), so also [HttpCache](http://symfony.com/doc/current/book/http_cache.html).
+Laravel can use [HttpKernelInterface Middlewares](http://stackphp.com/middlewares/), so also [HttpCache](http://symfony.com/doc/current/book/http_cache.html).
 This package provides a simple ServiceProvider to get you started with HttpCache.
 
 First, require this package with composer
 
-    composer require barryvdh/laravel-httpcache
+```
+composer require barryvdh/laravel-httpcache
+```
 
 After updating, add the ServiceProvider to the array of providers in app/config/app.php
 
-    'Barryvdh\HttpCache\ServiceProvider',
+```
+'Barryvdh\HttpCache\ServiceProvider',
+```
 
 You can now add the Middleware to your Kernel:
 
-    'Barryvdh\HttpCache\Middleware\CacheRequests',
+```
+'Barryvdh\HttpCache\Middleware\CacheRequests',
+```
 
 Caching is now enabled, for public responses. Just set the Ttl or MaxSharedAge
 
