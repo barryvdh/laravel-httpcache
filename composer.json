@@ -2,7 +2,12 @@
     "name": "barryvdh/laravel-httpcache",
     "description": "HttpCache for Laravel",
     "license": "MIT",
-    "keywords": ["laravel", "httpcache", "cache", "esi"],
+    "keywords": [
+        "laravel",
+        "httpcache",
+        "cache",
+        "esi"
+    ],
     "authors": [
         {
             "name": "Barry vd. Heuvel",
@@ -11,13 +16,13 @@
     ],
     "require": {
         "php": ">=7.2",
-        "illuminate/support": "^6|^7|^8|^9",
+        "illuminate/support": "^6|^7|^8|^9|^10.0",
         "symfony/console": "^4|^5|^6",
         "symfony/http-kernel": "^4|^5|^6",
         "barryvdh/laravel-stack-middleware": "^1.0"
     },
     "require-dev": {
-        "orchestra/testbench": "^4|^5|^6|^7"
+        "orchestra/testbench": "^4|^5|^6|^7|^8.0"
     },
     "autoload": {
         "psr-4": {
