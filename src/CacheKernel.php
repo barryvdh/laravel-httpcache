@@ -4,6 +4,7 @@ namespace Barryvdh\HttpCache;
 
 use Illuminate\Contracts\Http\Kernel;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\HttpCache\HttpCache;
 use Symfony\Component\HttpKernel\HttpCache\Store;
 use Symfony\Component\HttpKernel\HttpCache\SurrogateInterface;
@@ -22,7 +23,7 @@ class CacheKernel implements HttpKernelInterface
     /**
      * {@inheritdoc}
      */
-    public function handle(Request $request, $type = self::MASTER_REQUEST, $catch = true)
+    public function handle(Request $request, $type = self::MASTER_REQUEST, $catch = true): Response
     {
         return $this->kernel->handle($request);
     }
