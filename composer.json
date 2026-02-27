@@ -16,13 +16,13 @@
     ],
     "require": {
         "php": "^8",
-        "illuminate/support": "^9|^10|^11.0|^12.0",
+        "illuminate/support": "^9|^10|^11.0|^12.0|^13.0",
         "symfony/console": "^6|^7.0",
         "symfony/http-kernel": "^6|^7.0",
         "barryvdh/laravel-stack-middleware": "^1.0"
     },
     "require-dev": {
-        "orchestra/testbench": "^7|^8|^9.0|^10.0"
+        "orchestra/testbench": "^7|^8|^9.0|^10.0|^11.0"
     },
     "autoload": {
         "psr-4": {
